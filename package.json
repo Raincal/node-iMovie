@@ -1,6 +1,6 @@
 {
   "name": "movie",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -12,6 +12,25 @@
     "express": "~4.12.2",
     "jade": "~1.9.2",
     "morgan": "~1.5.1",
-    "serve-favicon": "~2.2.0"
-  }
+    "multer": "^1.0.0",
+    "serve-favicon": "~2.2.0",
+    "underscore": "^1.8.3"
+  },
+  "main": "app.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Raincal/node-iMovie.git"
+  },
+  "keywords": [
+    "express",
+    "mongodb"
+  ],
+  "author": "Raincal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Raincal/node-iMovie/issues"
+  },
+  "homepage": "https://github.com/Raincal/node-iMovie#readme",
+  "description": ""
 }
