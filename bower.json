@@ -1,0 +1,26 @@
+{
+  "name": "node-iMovie",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Raincal/node-iMovie",
+  "authors": [
+    "Raincal <cyj94228@gmail.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "iMovie"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5"
+  }
+}

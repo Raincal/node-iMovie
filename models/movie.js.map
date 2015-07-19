@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "movie.js",
+  "sourceRoot": "",
+  "sources": [
+    "movie.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,MAAA;;EAAA,QAAA,GAAW,OAAA,CAAQ,UAAR;;EACX,WAAA,GAAc,OAAA,CAAQ,kBAAR;;EACd,KAAA,GAAQ,QAAQ,CAAC,KAAT,CAAe,OAAf,EAAwB,WAAxB;;EACR,MAAM,CAAC,OAAP,GAAiB;AAHjB"
+}
