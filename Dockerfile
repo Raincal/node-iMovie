@@ -10,7 +10,7 @@ WORKDIR /movie
 # Install the dependencies modules
 RUN npm install
 RUN npm install bower -g
-RUN bower install
+RUN bower install --allow-root
 
 # Expose the container port
 EXPOSE 80
