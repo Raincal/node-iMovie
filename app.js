@@ -7,9 +7,6 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 // mongoose.connect('mongodb://localhost/iMovie');
 var PORT = 3000;
-var routes = require('./routes/index');
-var app = express();
-
 var port = process.env.MONGODB_PORT_27017_TCP_PORT;
 var addr = process.env.MONGODB_PORT_27017_TCP_ADDR;
 var instance = process.env.MONGODB_INSTANCE_NAME;
@@ -18,6 +15,9 @@ var username = process.env.MONGODB_USERNAME;
 
 // 'mongodb://user:pass@localhost:port/database'
 mongoose.connect('mongodb://' + username + ':' + password +'@' + addr + ':' + port + '/' + instance);
+var routes = require('./routes/index');
+
+var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
