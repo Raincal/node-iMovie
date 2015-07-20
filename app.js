@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 // mongoose.connect('mongodb://localhost/iMovie');
-var PORT = 3000;
+var PORT = 80;
 var port = process.env.MONGODB_PORT_27017_TCP_PORT;
 var addr = process.env.MONGODB_PORT_27017_TCP_ADDR;
 var instance = process.env.MONGODB_INSTANCE_NAME;
