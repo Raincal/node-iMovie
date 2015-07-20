@@ -1,6 +1,5 @@
 mongoose = require "mongoose"
 #bcrypt = require "bcrypt"
-#crypto = require "crypto"
 #SALT_WORK_FACTOR = 0
 
 UserSchema = new mongoose.Schema({
@@ -24,7 +23,6 @@ UserSchema.pre 'save', (next) ->
     @meta.createAt = Date.now()
   next()
 
-
 ###
   bcrypt.genSalt SALT_WORK_FACTOR, (err, salt) ->
     if err
@@ -36,7 +34,6 @@ UserSchema.pre 'save', (next) ->
       @password = hash
       next()
 ###
-
 
 UserSchema.statics = {
   fetch: (cb) ->

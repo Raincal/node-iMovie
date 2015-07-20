@@ -5,10 +5,20 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/iMovie');
-
+// mongoose.connect('mongodb://localhost/iMovie');
+var PORT = 3000;
 var routes = require('./routes/index');
 var app = express();
+
+var port = process.env.MONGODB_PORT_27017_TCP_PORT;
+var addr = process.env.MONGODB_PORT_27017_TCP_ADDR;
+var instance = process.env.MONGODB_INSTANCE_NAME;
+var password = process.env.MONGODB_PASSWORD;
+var username = process.env.MONGODB_USERNAME;
+
+// 'mongodb://user:pass@localhost:port/database'
+mongoose.connect('mongodb://' + username + ':' + password +'@' + addr + ':' + port + '/' + instance);
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -58,5 +68,7 @@ app.use(function(err, req, res, next) {
   });
 });
 
+app.listen(PORT);
+console.log('Running on http://localhost:' + PORT);
 
 module.exports = app;

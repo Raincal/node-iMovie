@@ -176,12 +176,17 @@ router.post('/user/signin', function(req, res){
         }
         if(user){
             if(password !== user.password){
-                console.log('wrong');
+                console.log('password wrong');
+                res.redirect('/');
             }
             else{
                 console.log('success');
                 res.redirect('/');
             }
+        }
+        else{
+            console.log('user not sign up');
+            res.redirect('/');
         }
     })
 });
