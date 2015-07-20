@@ -7,6 +7,8 @@ var _ = require('underscore');
 
 /* GET home page. */
 router.get('/', function(req, res){
+    console.log('user in session: ');
+    console.log(req.session.user);
   Movie.fetch(function(err, movies){
     if(err){
       console.log(err);
@@ -134,6 +136,20 @@ router.delete('/admin/list', function(req, res){
   }
 });
 
+//admin delete userlist
+router.delete('/admin/userlist', function(req, res){
+    var id = req.query.id;
+    if(id){
+        User.remove({_id: id}, function(err, user){
+            if(err){
+                console.log(err);
+            }
+            else{
+                res.json({success: 1});
+            }
+        })
+    }
+});
 //sign up
 router.post('/user/signup', function(req, res){
     var md5 =  crypto.createHash('md5');
@@ -158,6 +174,7 @@ router.post('/user/signup', function(req, res){
                     console.log(err);
                 }
                 console.log(user);
+                req.session.user = user;
                 res.redirect('/admin/userlist');
             });
 
@@ -169,39 +186,50 @@ router.post('/user/signup', function(req, res){
 router.post('/user/signin', function(req, res){
     var md5 =  crypto.createHash('md5');
     var password = md5.update(req.body.password).digest('base64');
-    var _user = req.body.name;
-    User.findOne({name: _user}, function(err, user){
+    var name = req.body.name;
+    User.findOne({name: name}, function(err, user){
         if(err){
             console.log(err);
         }
-        if(user){
-            if(password !== user.password){
-                console.log('password wrong');
-                res.redirect('/');
-            }
-            else{
-                console.log('success');
-                res.redirect('/');
-            }
+        if(!user){
+            console.log('user not sign up');
+            res.redirect('/');
+        }
+        if(password !== user.password){
+            console.log('password wrong');
+            res.redirect('/');
         }
         else{
-            console.log('user not sign up');
+            req.session.user = user;
+            console.log('success');
             res.redirect('/');
         }
     })
 });
 
+//logout
+router.get('/logout', function(req, res){
+   delete req.session.user;
+    res.redirect('/');
+});
+
 //user list page
 router.get('/admin/userlist', function(req, res){
-    User.fetch(function(err, users){
-        if(err){
-            console.log(err);
-        }
-        res.render('pages/userlist', {
-            title: 'iMovie 用户列表页',
-            users: users
+    if(req.session.user){
+        User.fetch(function(err, users){
+            if(err){
+                console.log(err);
+            }
+            res.render('pages/userlist', {
+                title: 'iMovie 用户列表页',
+                users: users
+            })
         })
-    })
+    }
+    else{
+        console.log('not login');
+        res.redirect('/');
+    }
 });
 
 module.exports = router;
