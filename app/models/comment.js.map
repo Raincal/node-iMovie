@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "comment.js",
+  "sourceRoot": "",
+  "sources": [
+    "comment.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,MAAA;;EAAA,QAAA,GAAW,OAAA,CAAQ,UAAR;;EACX,aAAA,GAAgB,OAAA,CAAQ,oBAAR;;EAChB,OAAA,GAAU,QAAQ,CAAC,KAAT,CAAe,SAAf,EAA0B,aAA1B;;EACV,MAAM,CAAC,OAAP,GAAiB;AAHjB"
+}

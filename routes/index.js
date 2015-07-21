@@ -3,6 +3,7 @@ var router = express.Router();
 var Index = require('../app/controllers/index');
 var Movie = require('../app/controllers/movie');
 var User = require('../app/controllers/user');
+var Comment = require('../app/controllers/comment');
 var crypto = require('crypto');
 //var _ = require('underscore');
 
@@ -32,5 +33,8 @@ router.get('/admin/movie/update/:id', User.signinRequired, User.adminRequired, M
 router.post('/admin/movie', Movie.save);
 router.get('/admin/movie/list', User.signinRequired, User.adminRequired, Movie.list);
 router.delete('/admin/movie/list', Movie.del);
+
+// Comment
+router.post('/user/comment', User.signinRequired, Comment.save);
 
 module.exports = router;

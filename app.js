@@ -23,7 +23,9 @@ var app = express();
 
 app.set('views', path.join(__dirname, 'app/views/pages'));
 app.set('view engine', 'jade');
+var moment = require('moment');
 app.locals.moment = require('moment');
+console.log(moment(new Date()).format('YYYY-MM-DD'));
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
