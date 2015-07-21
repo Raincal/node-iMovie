@@ -6,7 +6,10 @@ UserSchema = new mongoose.Schema({
   name:
     unique: true
     type: String
-  password: String
+  password: String,
+  role:
+    type: Number
+    default: 0
   meta:
     createAt:
       type: Date

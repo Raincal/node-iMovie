@@ -1,0 +1,13 @@
+extends ../layout
+block content
+  .container
+    .col-md-6.col-lg-offset-3
+      form(method="POST", action="/signin")
+        .modal-body
+          .form-group
+            label(for="signinName") 用户名
+            input#signinName.form-control(name="name", type="text")
+          .form-group
+            label(for="signinPwd") 密码
+            input#signinPwd.form-control(name="password", type="password")
+          button.btn.btn-success.center-block(type="submit") 登录

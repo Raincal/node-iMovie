@@ -19,24 +19,18 @@ var username = process.env.MONGODB_USERNAME;
 var dbUrl = 'mongodb://' + username + ':' + password +'@' + addr + ':' + port + '/' + instance;
 mongoose.connect(dbUrl);
 var routes = require('./routes/index');
-
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'app/views/pages'));
 app.set('view engine', 'jade');
-
 app.locals.moment = require('moment');
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname + '/public')));
-
 app.use(session({
     secret: 'imovie',
     cookie: { maxAge: 60000 * 60 },
@@ -48,11 +42,6 @@ app.use(session({
         collection: 'sessions'
     })
 }));
-app.use(function(req, res, next) {
-    res.locals.user = req.session.user;
-    console.log(res.locals.user);
-    next();
-});
 
 app.use('/', routes);
 // catch 404 and forward to error handler
@@ -61,7 +50,6 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-
 
 // error handlers
 
@@ -75,6 +63,8 @@ if (app.get('env') === 'development') {
       error: err
     });
   });
+    app.locals.pretty = true;
+    mongoose.set('debug', true);
 }
 
 // production error handler
