@@ -40,7 +40,7 @@ app.use(session({
     saveUninitialized: true,
     store: new MongoStore({
         url: dbUrl,
-        auto_reconnect: true,
+        //auto_reconnect: true,
         collection: 'sessions'
     })
 }));

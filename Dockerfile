@@ -9,11 +9,12 @@ WORKDIR /movie
 
 # Install the dependencies modules
 RUN npm install
+RUN npm install supervisor -g
 RUN npm install bower -g
 RUN bower install --allow-root
 
 # Expose the container port
 EXPOSE 80
 
-ENTRYPOINT ["node", "app.js"]
+ENTRYPOINT ["supervisor", "app.js"]
 

@@ -1,16 +1,17 @@
-﻿var express = require('express');
+﻿﻿var express = require('express');
 var router = express.Router();
 var Index = require('../app/controllers/index');
 var Movie = require('../app/controllers/movie');
 var User = require('../app/controllers/user');
 var Comment = require('../app/controllers/comment');
+var Category = require('../app/controllers/category');
 var crypto = require('crypto');
 //var _ = require('underscore');
 
 router.use(function(req, res, next) {
     res.locals.user = req.session.user;
-    console.log('session in local');
-    console.log(res.locals.user);
+    /*console.log('session in local');
+    console.log(res.locals.user);*/
     next();
 });
 
@@ -36,5 +37,10 @@ router.delete('/admin/movie/list', Movie.del);
 
 // Comment
 router.post('/user/comment', User.signinRequired, Comment.save);
+
+// Category
+router.get('/admin/category/new', Category.new);
+router.post('/admin/category', Category.save);
+router.get('/admin/category/list', Category.list);
 
 module.exports = router;

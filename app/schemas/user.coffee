@@ -9,7 +9,7 @@ UserSchema = new mongoose.Schema({
   password: String,
   role:
     type: Number
-    default: 0
+    default: 11
   meta:
     createAt:
       type: Date

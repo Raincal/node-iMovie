@@ -2,7 +2,7 @@ Comment = require '../models/comment'
 
 exports.save = (req, res) ->
   _comment = req.body
-  console.log(_comment);
+#  console.log(_comment);
   movieId = _comment.movie
 
   if _comment.cid

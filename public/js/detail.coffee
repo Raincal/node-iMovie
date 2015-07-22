@@ -8,20 +8,25 @@ $ ->
       $('#toId').val toId
     else
       $('<input>')
-        .attr
+      .attr
           type: 'hidden'
           id: 'toId'
           name: 'tid'
           value: toId
-        .appendTo '#commentForm'
+      .appendTo '#commentForm'
 
     if $('#commentId').length > 0
-          $('#commentId').val commentId
+      $('#commentId').val commentId
     else
       $('<input>')
-        .attr
+      .attr
           type: 'hidden'
           id: 'commentId'
           name: 'cid'
           value: commentId
-        .appendTo '#commentForm'
+      .appendTo '#commentForm'
+
+  $('.publish').click (e) ->
+    if $('textarea').val() == ''
+      console.log '请输入内容!'
+      return false

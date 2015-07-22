@@ -1,5 +1,6 @@
 var Movie = require('../models/movie');
 var Comment = require('../models/comment');
+var Category = require('../models/category');
 var _ = require('underscore');
 
 //detail page
@@ -11,7 +12,7 @@ exports.detail = function(req, res){
             .populate( 'from', 'name')
             .populate( 'reply.from reply.to', 'name')
             .exec(function( err, comments){
-            console.log(comments);
+            //console.log(comments);
                 res.render('detail', {
                     title: 'iMovie ' + movie.title,
                     movie: movie,
@@ -23,28 +24,34 @@ exports.detail = function(req, res){
 
 //admin page
 exports.new = function(req,res){
-    res.render('admin',{
-        title: 'iMovie 后台录入页',
-        movie: {
-            title: '',
-            director: '',
-            country: '',
-            year: '',
-            poster: '',
-            flash: '',
-            summary: '',
-            language: ''
-        }
-    });
+    Category.find({}, function(err, categories){
+        res.render('admin',{
+            title: 'iMovie 后台录入页',
+            categories: categories,
+            movie: {
+                title: '',
+                category: '',
+                categoryName: '',
+                director: '',
+                country: '',
+                year: '',
+                poster: '',
+                flash: '',
+                summary: '',
+                language: ''
+            }
+        });
+    })
 };
 
 //admin add movie
 exports.save = function(req, res){
     var id = req.body._id;
     var movieObj = req.body;
+    console.log(movieObj);
     var _movie;
 
-    if(id !== 'undefined'){
+    if(id){
         Movie.findById(id, function(err, movie){
             if(err){
                 console.log(err);
@@ -59,7 +66,8 @@ exports.save = function(req, res){
         })
     }
     else{
-        _movie = new Movie({
+        /*_movie = new Movie({
+             category: movieObj.category,
             title: movieObj.title,
             director: movieObj.director,
             country: movieObj.country,
@@ -68,11 +76,36 @@ exports.save = function(req, res){
             flash: movieObj.flash,
             summary: movieObj.summary,
             language: movieObj.language
-        });
+        });*/
+        var categoryId = movieObj.category;
+        var categoryName = movieObj.categoryName;
+        _movie = new Movie(movieObj);
+        _movie.save(function(err, movie) {
+            if (err) {
+                console.log(err)
+            }
 
-        _movie.save(function(err, movie){
-            if(err){
-                console.log(err);
+            if (categoryId) {
+                Category.findById(categoryId, function(err, category) {
+                    category.movies.push(movie._id);
+
+                    category.save(function(err, category) {
+                        res.redirect('/movie/' + movie._id);
+                    })
+                })
+            }
+            else if(categoryName){
+                var category = new Category({
+                    name: categoryName,
+                    movies: [movie._id]
+                });
+
+                category.save(function(err, category){
+                    movie.category = category._id;
+                    movie.save(function(err, movie){
+                        return res.redirect('/movie/' + movie._id);
+                    })
+                })
             }
             res.redirect('/movie/' + movie._id);
         })
@@ -112,10 +145,13 @@ exports.update = function(req, res){
     var id = req.params.id;
     if(id){
         Movie.findById(id, function(err, movie){
-            res.render('admin', {
-                title: 'iMovie 后台更新页',
-                movie: movie
-            });
+            Category.find({}, function(err, categories){
+                res.render('admin', {
+                    title: 'iMovie 后台更新页',
+                    movie: movie,
+                    categories: categories
+                });
+            })
         })
     }
 };

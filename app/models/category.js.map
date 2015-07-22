@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "category.js",
+  "sourceRoot": "",
+  "sources": [
+    "category.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,MAAA;;EAAA,QAAA,GAAW,OAAA,CAAQ,UAAR;;EACX,cAAA,GAAiB,OAAA,CAAQ,qBAAR;;EACjB,QAAA,GAAW,QAAQ,CAAC,KAAT,CAAe,UAAf,EAA2B,cAA3B;;EACX,MAAM,CAAC,OAAP,GAAiB;AAHjB"
+}

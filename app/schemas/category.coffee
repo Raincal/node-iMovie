@@ -2,19 +2,12 @@ mongoose = require "mongoose"
 Schema = mongoose.Schema
 ObjectId = Schema.Types.ObjectId
 
-MovieSchema = new Schema({
-  director: String
-  title: String
-  language: String
-  country: String
-  summary: String
-  flash: String
-  poster: String
-  flash: String
-  year: Number
-  category:
-    type: ObjectId
-    ref: 'Category'
+CategorySchema = new Schema({
+  name: String
+  movies: [
+    type: ObjectId,
+    ref: 'Movie'
+  ]
   meta: {
     createAt: {
       type: Date
@@ -27,14 +20,14 @@ MovieSchema = new Schema({
   }
 })
 
-MovieSchema.pre 'save', (next) ->
+CategorySchema.pre 'save', (next) ->
   if @isNew
     @meta.createAt = @meta.updateAt = Date.now()
   else
     @meta.createAt = Date.now()
   next()
 
-MovieSchema.statics = {
+CategorySchema.statics = {
   fetch: (cb) ->
     @.find({})
     .sort 'meta.updateAt'
@@ -44,4 +37,4 @@ MovieSchema.statics = {
     .exec cb
 }
 
-module.exports = MovieSchema
+module.exports = CategorySchema

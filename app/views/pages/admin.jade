@@ -3,7 +3,26 @@ block content
   .container
     .row
       form.form-horizontal(method="post", action="/admin/movie")
-        input(type="hidden", name="_id", value="#{movie._id}")
+        if movie._id
+          input(type="hidden", name="_id", value="#{movie._id}")
+        .form-group
+          label.col-sm-2.control-label(for="douban") 豆瓣同步
+          .col-sm-10
+            input#douban.form-control(type="text")
+        .form-group
+          label.col-sm-2.control-label(for="inputCategory") 电影分类
+          .col-sm-10
+            input#inputCategory.form-control(type="text", name="categoryName", value=movie.categoryName)
+        .form-group
+          label.col-sm-2.control-label 分类选择
+          each cat in categories
+            label.radio-inline
+              if movie.category
+                input(type="radio", name="category", value=cat._id, checked=cat._id.toString()==movie.category.toString())
+                | #{cat.name}
+              else
+                input(type="radio", name="category", value=cat._id)
+                | #{cat.name}
         .form-group
           label.col-sm-2.control-label(for="inputTitle") 电影名字
           .col-sm-10
@@ -39,3 +58,4 @@ block content
         .form-group
           .col-sm-offset-2.col-sm-10
           button.btn.btn-primary(type="submit") 录入
+  script(src="/js/admin.js")
