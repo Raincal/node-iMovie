@@ -107,7 +107,7 @@ exports.save = function(req, res){
                     })
                 })
             }
-            res.redirect('/movie/' + movie._id);
+            else res.redirect('/movie/' + movie._id);
         })
     }
 };
