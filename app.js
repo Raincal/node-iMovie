@@ -7,7 +7,7 @@ var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var MongoStore = require('connect-mongo')(session);
 var mongoose = require('mongoose');
-//var dbUrl = 'mongodb://localhost/iMovie';
+var dbUrl = 'mongodb://localhost/iMovie';
 var PORT = 80;
 var port = process.env.MONGODB_PORT_27017_TCP_PORT;
 var addr = process.env.MONGODB_PORT_27017_TCP_ADDR;
@@ -16,7 +16,7 @@ var password = process.env.MONGODB_PASSWORD;
 var username = process.env.MONGODB_USERNAME;
 
 // 'mongodb://user:pass@localhost:port/database'
-var dbUrl = 'mongodb://' + username + ':' + password +'@' + addr + ':' + port + '/' + instance;
+//var dbUrl = 'mongodb://' + username + ':' + password +'@' + addr + ':' + port + '/' + instance;
 mongoose.connect(dbUrl);
 var routes = require('./routes/index');
 var app = express();
