@@ -1,4 +1,4 @@
-﻿﻿var express = require('express');
+﻿var express = require('express');
 var router = express.Router();
 var Index = require('../app/controllers/index');
 var Movie = require('../app/controllers/movie');
@@ -42,5 +42,8 @@ router.post('/user/comment', User.signinRequired, Comment.save);
 router.get('/admin/category/new', Category.new);
 router.post('/admin/category', Category.save);
 router.get('/admin/category/list', Category.list);
+
+// Search
+router.get('/results', Index.search);
 
 module.exports = router;

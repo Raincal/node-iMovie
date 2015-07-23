@@ -46,7 +46,7 @@ exports.signin = function(req, res){
             console.log('user not sign up');
             res.redirect('/signup');
         }
-        if(password !== user.password){
+        else if(password !== user.password){
             console.log('password wrong');
             res.redirect('/signin');
         }

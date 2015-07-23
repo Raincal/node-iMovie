@@ -61,6 +61,20 @@ exports.save = function(req, res){
                 if(err){
                     console.log(err);
                 }
+                /*Category.findById(movie.category, function(err, category){
+                    category.movies.push(movie._id);
+                    Array.prototype.unique = function(){
+                        var n = [];
+                        for(var i=0;i<this.length;i++){
+                            if(n.indexOf(this[i]) == -1) n.push(this[i]);
+                        }
+                        return n;
+                    };
+                    //category.movies = [];
+                    category.save(function(err, category) {
+                        return res.redirect('/movie/' + movie._id);
+                    })
+                });*/
                 res.redirect('/movie/' + movie._id);
             })
         })
