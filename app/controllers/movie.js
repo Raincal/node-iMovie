@@ -2,6 +2,8 @@ var Movie = require('../models/movie');
 var Comment = require('../models/comment');
 var Category = require('../models/category');
 var _ = require('underscore');
+var fs = require('fs');
+var path = require('path');
 
 //detail page
 exports.detail = function(req, res){
@@ -44,6 +46,30 @@ exports.new = function(req,res){
     })
 };
 
+//admin save poster
+exports.savePoster = function(req, res, next){
+    console.log(req.files);
+    var posterData = req.files.uploadPoster;
+    var posterPath = posterData.path;
+    var originalFilename = posterData.originalFilename;
+    if(originalFilename){
+        fs.readFile(posterPath, function(err, data){
+            var timestamp = Date.now();
+            var type = posterData.type.split('/')[1];
+            var poster = timestamp + '.' + type;
+            var newPath = path.join(__dirname, '../../', '/public/upload/' + poster);
+
+            fs.writeFile(newPath, data, function(err){
+                req.poster = poster;
+                next();
+            })
+        })
+    }
+    else{
+        next();
+    }
+};
+
 //admin add movie
 exports.save = function(req, res){
     var id = req.body._id;
@@ -51,6 +77,9 @@ exports.save = function(req, res){
     console.log(movieObj);
     var _movie;
 
+    if(req.poster){
+        movieObj.poster = req.poster;
+    }
     if(id){
         Movie.findById(id, function(err, movie){
             if(err){

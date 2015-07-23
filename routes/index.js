@@ -6,6 +6,8 @@ var User = require('../app/controllers/user');
 var Comment = require('../app/controllers/comment');
 var Category = require('../app/controllers/category');
 var crypto = require('crypto');
+var multipart = require('connect-multiparty');
+var multipartMiddleware = multipart();
 //var _ = require('underscore');
 
 router.use(function(req, res, next) {
@@ -31,9 +33,9 @@ router.delete('/admin/user/list', User.del);
 router.get('/movie/:id', Movie.detail);
 router.get('/admin/movie/new', User.signinRequired, User.adminRequired, Movie.new);
 router.get('/admin/movie/update/:id', User.signinRequired, User.adminRequired, Movie.update);
-router.post('/admin/movie', Movie.save);
+router.post('/admin/movie', multipartMiddleware, User.signinRequired, User.adminRequired, Movie.savePoster, Movie.save);
 router.get('/admin/movie/list', User.signinRequired, User.adminRequired, Movie.list);
-router.delete('/admin/movie/list', Movie.del);
+router.delete('/admin/movie/list',User.signinRequired, User.adminRequired, Movie.del);
 
 // Comment
 router.post('/user/comment', User.signinRequired, Comment.save);
