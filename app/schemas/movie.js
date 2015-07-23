@@ -18,6 +18,10 @@
     poster: String,
     flash: String,
     year: Number,
+    pv: {
+      type: Number,
+      "default": 0
+    },
     category: {
       type: ObjectId,
       ref: 'Category'

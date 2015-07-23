@@ -13,7 +13,7 @@ exports.index = function(req, res){
                 console.log(err);
             }
             res.render('index', {
-                title: 'iMovie 首页',
+                title: 'IMOVIE',
                 categories: categories
             })
         })
@@ -44,7 +44,7 @@ exports.search = function(req, res){
                 var results = movies.slice(index, index + count);
                 console.log(results.length);
                 res.render('results', {
-                    title: 'iMovie 结果列表',
+                    title: 'IMOVIE 结果列表',
                     keywords: category.name,
                     query: 'cat=' + catId,
                     movies: results,
@@ -60,7 +60,7 @@ exports.search = function(req, res){
                 if(err) throw(err);
                 var results = movies.slice(index, index + count);
                 res.render('results', {
-                    title: 'iMovie 搜索结果',
+                    title: 'IMOVIE 搜索结果',
                     keywords: q,
                     query: 'q=' + q,
                     movies: results,

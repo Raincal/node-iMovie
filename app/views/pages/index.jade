@@ -4,20 +4,21 @@ block content
   .container(style="padding-bottom: 100px;")
     .row
       each cat in categories
-        .panel.panel-default
-          .panel-heading
-            h3
-              a(href="/results?cat=#{cat._id}&p=0") #{cat.name}
-          .panel-body
-            if cat.movies && cat.movies.length > 0
-              each item in cat.movies
-                .col-md-2
-                  .thumbnail
-                    a(href="/movie/#{item._id}")
-                    if item.poster.indexOf('http') > -1
-                      img(src="#{item.poster}", alt="#{item.title}")
-                    else
-                      img(src="/upload/#{item.poster}", alt="#{item.title}")
-                    .caption.text-center
-                      h3 #{item.title}
-                      p: a.btn.btn-primary(href="/movie/#{item._id}", role="button") 观看预告片
+        if cat.movies.length > 0
+          .panel.panel-default
+            .panel-heading
+              h3.panel-title
+                a(href="/results?cat=#{cat._id}&p=0", target="_blank") #{cat.name}
+            .panel-body
+              if cat.movies && cat.movies.length > 0
+                each item in cat.movies
+                  .col-md-2
+                    .thumbnail
+                      a(href="/movie/#{item._id}", target="_blank")
+                        if item.poster.indexOf('http') > -1
+                          img(src="#{item.poster}", alt="#{item.title}")
+                        else
+                          img(src="/upload/#{item.poster}", alt="#{item.title}")
+                      .caption.text-center
+                        h4 #{item.title}
+                        p: a.btn.btn-primary.btn-sm(href="/movie/#{item._id}", role="button", target="_blank") 点击播放

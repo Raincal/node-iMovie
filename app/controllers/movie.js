@@ -8,6 +8,9 @@ var path = require('path');
 //detail page
 exports.detail = function(req, res){
     var id = req.params.id;
+    Movie.update({_id: id}, {$inc: {pv: 1}}, function(err){
+        if(err) throw(err);
+    });
     Movie.findById(id, function(err, movie){
         Comment
             .find({ movie: id})
@@ -16,7 +19,7 @@ exports.detail = function(req, res){
             .exec(function( err, comments){
             //console.log(comments);
                 res.render('detail', {
-                    title: 'iMovie ' + movie.title,
+                    title: 'IMOVIE ' + movie.title,
                     movie: movie,
                     comments: comments
                 })
@@ -28,7 +31,7 @@ exports.detail = function(req, res){
 exports.new = function(req,res){
     Category.find({}, function(err, categories){
         res.render('admin',{
-            title: 'iMovie 后台录入页',
+            title: 'IMOVIE 后台录入页',
             categories: categories,
             movie: {
                 title: '',
@@ -157,14 +160,26 @@ exports.save = function(req, res){
 
 //movie list
 exports.list = function(req, res){
-    Movie.fetch(function(err, movies){
+    /*Movie.fetch(function(err, movies){
         if(err){
             console.log(err);
         }
         res.render('list', {
-            title: 'iMovie 列表页',
+            title: 'IMOVIE 列表页',
             movies: movies
         })
+    })*/
+    Movie
+        .find({})
+        .populate('category', 'name')
+        .exec(function(err, movies){
+            if(err){
+                console.log(err);
+            }
+            res.render('list', {
+                title: 'IMOVIE 列表页',
+                movies: movies
+            })
     })
 };
 
@@ -190,7 +205,7 @@ exports.update = function(req, res){
         Movie.findById(id, function(err, movie){
             Category.find({}, function(err, categories){
                 res.render('admin', {
-                    title: 'iMovie 后台更新页',
+                    title: 'IMOVIE 后台更新页',
                     movie: movie,
                     categories: categories
                 });

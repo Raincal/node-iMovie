@@ -4,7 +4,7 @@ var Category = require('../models/category');
 //admin page
 exports.new = function(req,res){
     res.render('category_admin',{
-        title: 'iMovie 电影分类后台录入页',
+        title: 'IMOVIE 电影分类后台录入页',
         category: {
             name: ''
         }
@@ -34,7 +34,7 @@ exports.list = function(req, res){
             console.log(err);
         }
         res.render('categorylist', {
-            title: 'iMovie 列表页',
+            title: 'IMOVIE 列表页',
             categories: categories
         })
     })

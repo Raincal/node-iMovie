@@ -60,13 +60,13 @@ exports.signin = function(req, res){
 
 exports.showsignin = function(req, res){
     res.render('signin', {
-        title: 'iMovie 登陆'
+        title: 'IMOVIE 登陆'
     });
 };
 
 exports.showsignup = function(req, res){
     res.render('signup', {
-        title: 'iMovie 注册'
+        title: 'IMOVIE 注册'
     });
 };
 
@@ -83,7 +83,7 @@ exports.list = function(req, res){
             console.log(err);
         }
         res.render('userlist', {
-            title: 'iMovie 用户列表页',
+            title: 'IMOVIE 用户列表页',
             users: users
         })
     })
