@@ -160,15 +160,6 @@ exports.save = function(req, res){
 
 //movie list
 exports.list = function(req, res){
-    /*Movie.fetch(function(err, movies){
-        if(err){
-            console.log(err);
-        }
-        res.render('list', {
-            title: 'IMOVIE 列表页',
-            movies: movies
-        })
-    })*/
     Movie
         .find({})
         .populate('category', 'name')

@@ -31,9 +31,11 @@
                     .form-group
                         label(for="signupName") 用户名
                         input#signupName.form-control(name="name", type="text")
-                    .form-
+                        span#rnMsg
+                    .form-group
                         label(for="signupPwd") 密码
                         input#signupPwd.form-control(name="password", type="password")
+                        span#rpMsg
                 .modal-footer
                     button.btn.btn-default(type="button", data-dismiss="modal") 关闭
                     button.btn.btn-success(type="submit") 注册
@@ -46,11 +48,13 @@
                     .form-group
                         label(for="signinName") 用户名
                         input#signinName.form-control(name="name", type="text")
+                        span#nMsg
                     .form-group
                         label(for="signinPwd") 密码
                         input#signinPwd.form-control(name="password", type="password")
+                        span#pMsg
                 .modal-footer
                     button.btn.btn-default(type="button", data-dismiss="modal") 关闭
                     button.btn.btn-success(type="submit") 登录
-
+script(src="/js/validate.js")
 

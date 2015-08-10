@@ -59,12 +59,20 @@ exports.signin = function(req, res){
 };
 
 exports.showsignin = function(req, res){
+    var user = req.session.user;
+    if(user){
+        res.redirect('/');
+    }
     res.render('signin', {
         title: 'IMOVIE 登陆'
     });
 };
 
 exports.showsignup = function(req, res){
+    var user = req.session.user;
+    if(user){
+        res.redirect('/');
+    }
     res.render('signup', {
         title: 'IMOVIE 注册'
     });
